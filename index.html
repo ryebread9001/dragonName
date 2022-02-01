@@ -1,0 +1,158 @@
+<html>
+  <head>
+
+  </head>
+  <style>
+    body {
+			font-family: 'Verdana';
+			height: 10em;
+    position: relative
+
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+
+
+    }
+  </style>
+  <body>
+
+    <h1>Your Dragon Name</h1>
+
+
+
+      <p id="values"></p>
+
+      <label for="name">First Name :</label>
+
+      <input type="text" placeholder="First Name" id="name" name="name" required minlength="2" maxlength="16" size="16">
+
+      <label for="last">Last Name :</label>
+
+      <input type="text" placeholder="Last Name" id="last" name="name" required minlength="2" maxlength="16" size="16">
+      <div> <br> </div>
+      <label for="mother">Mother's Name :</label>
+
+      <input type="text" placeholder="Mother's Name" id="mother" name="name" required minlength="2" maxlength="16" size="16">
+
+      <label for="father">Father's Name :</label>
+
+      <input type="text" id="father" placeholder="Father's Name" name="name" required minlength="2" maxlength="16" size="16">
+
+      <div> <br> </div>
+
+      <label for="middle">Middle Name :</label>
+
+      <input type="text" id="middle" placeholder="Middle Name" name="name" required minlength="2" maxlength="16" size="16">
+
+      <label for="ssnum">Social Security Number :</label>
+
+      <input type="text" id="ssnum" placeholder="Social Security" name="name" required minlength="1" maxlength="9" size="9">
+      <div> <br> </div>
+      <button id=vowels>Add vowels</button>
+      <button id=apost>Add apostrophes</button>
+
+
+      <!--<p id="result"></p>-->
+
+
+      <script>
+
+        //const nameinput = document.querySelector("name");
+        var firstname = document.getElementById('name');
+        var lastname = document.getElementById('last');
+        var mothername = document.getElementById('mother');
+        var fathername = document.getElementById('father');
+        var middlename = document.getElementById('middle');
+        const log = document.getElementById("values");
+        const result = document.getElementById("result");
+        const buttonvowel = document.getElementById("vowels");
+        const buttonapost = document.getElementById("apost");
+
+        firstname.addEventListener("input", updateValue);
+        lastname.addEventListener("input", updateValue);
+        mothername.addEventListener("input", updateValue);
+        fathername.addEventListener("input", updateValue);
+        middlename.addEventListener("input", updateValue);
+
+        let firstresult;
+        let lastresult;
+        let motherresult;
+        let fatherresult;
+        let middleresult;
+        let fatherextra;
+        let dragonname;
+        let dragonlastname;
+        let dragonnamefull;
+
+
+
+        function updateValue(e) {
+
+          firstresult = firstname.value.substring(firstname.value.length-2);
+          firstresult = firstresult.toLowerCase();
+          lastresult = lastname.value.substr(lastname.value.length/2, 2);
+          lastresult = lastresult.toLowerCase();
+          motherresult = mothername.value.substring(0, 2);
+          motherresult = motherresult.toLowerCase();
+          fatherresult = fathername.value.substring(fathername.value.length-1);
+          fatheresult = fatherresult.toLowerCase();
+          middleresult = middlename.value.substring(middlename.value.length-2);
+          middleresult = middleresult.toLowerCase();
+          fatherextra = fathername.value.substring(0, 2);
+          fatherextra = fatherextra.toLowerCase();
+
+          dragonname = firstresult + lastresult + motherresult + fatherresult;
+          dragonlastname = fatherextra + middleresult;
+          dragonnamefull = dragonname + " " + dragonlastname;
+
+          log.textContent = dragonnamefull;
+          result.textContent = dragonnamefull;
+
+
+        }
+
+        buttonvowel.addEventListener("click", function() {
+          const vowels=['a','e','i','o','u'];
+
+          var i = 1;
+          var limit = dragonnamefull.length;
+          console.log(dragonnamefull);
+          while (i <= limit)
+          {
+            if ((dragonnamefull[i] !== 'a' || dragonnamefull[i] !== 'e' || dragonnamefull[i] !== 'i' || dragonnamefull[i] !== 'o' || dragonnamefull[i] !== 'u')&&(dragonnamefull[i+1] !== 'a' || dragonnamefull[i+1] !== 'e' || dragonnamefull[i+1] !== 'i' || dragonnamefull[i+1] !== 'o' || dragonnamefull[i+1] !== 'u')) {
+
+              dragonnamefull = dragonnamefull.slice(0, i+1) + vowels[i] + dragonnamefull.slice(i+1);
+              console.log(dragonnamefull);
+              i += 16;
+              log.textContent = dragonnamefull;
+              result.textContent = dragonnamefull;
+            }
+            i++;
+          }
+
+        });
+        buttonapost.addEventListener("click", function() {
+          var i = 0;
+          var limit = dragonnamefull.length;
+          console.log(dragonnamefull);
+          while (i <= limit)
+          {
+            if ((dragonnamefull[i] == 'a' || dragonnamefull[i] == 'e' || dragonnamefull[i] == 'i' || dragonnamefull[i] == 'o' || dragonnamefull[i] == 'u')&&(dragonnamefull[i+1] == 'a' || dragonnamefull[i+1] == 'e' || dragonnamefull[i+1] == 'i' || dragonnamefull[i+1] == 'o' || dragonnamefull[i+1] == 'u')) {
+
+              dragonnamefull = dragonnamefull.slice(0, i+1) + "'" + dragonnamefull.slice(i+1);
+
+              i += 16;
+              log.textContent = dragonnamefull;
+              result.textContent = dragonnamefull;
+            }
+            i++;
+          }
+        });
+      </script>
+  </body>
+
+</html>
